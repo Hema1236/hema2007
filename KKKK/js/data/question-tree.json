@@ -1,0 +1,427 @@
+{
+  "root": {
+    "id": "root",
+    "depth": 10,
+    "type": "question",
+    "text": "What matters most to you in a medical career?",
+    "answers": [
+      { "text": "Financial security and high income", "next": "q_income" },
+      { "text": "Lifestyle balance and predictable hours", "next": "q_lifestyle" },
+      { "text": "Intellectual challenge and complex cases", "next": "q_cognitive" },
+      { "text": "Hands-on procedures and technical skill", "next": "q_procedural" }
+    ]
+  },
+
+  "q_income": {
+    "id": "q_income",
+    "depth": 8,
+    "type": "question",
+    "text": "Are you willing to complete a subspecialty fellowship (2–3 years after residency) to maximize long-term income?",
+    "answers": [
+      { "text": "Yes — I'll invest the extra training for higher earnings", "next": "q_income_fellowship" },
+      { "text": "No — I want a good income within residency training alone", "next": "q_income_no_fellowship" }
+    ]
+  },
+
+  "q_income_fellowship": {
+    "id": "q_income_fellowship",
+    "depth": 6,
+    "type": "question",
+    "text": "In pursuing a high-earning fellowship, do you prefer performing procedures or thinking through complex diagnostic problems?",
+    "answers": [
+      { "text": "Performing procedures and surgery — hands-on is essential", "next": "q_income_surgical" },
+      { "text": "Diagnosing, interpreting, and consulting — cognitive excellence", "next": "result_competitive_diagnostic" }
+    ]
+  },
+
+  "q_income_surgical": {
+    "id": "q_income_surgical",
+    "depth": 4,
+    "type": "question",
+    "text": "What surgical environment appeals most to you?",
+    "answers": [
+      { "text": "Fast-paced trauma, acute emergencies, adrenaline-driven work", "next": "result_surgery_acute" },
+      { "text": "Precise, technical elective procedures with meticulous technique", "next": "result_surgery_elective" }
+    ]
+  },
+
+  "q_income_no_fellowship": {
+    "id": "q_income_no_fellowship",
+    "depth": 6,
+    "type": "question",
+    "text": "Without a fellowship, where do you see yourself working?",
+    "answers": [
+      { "text": "Hospital-based — ER, ICU, or procedural environment", "next": "result_hospital_income" },
+      { "text": "Outpatient clinic with procedures and good pay", "next": "result_outpatient_income" }
+    ]
+  },
+
+  "q_lifestyle": {
+    "id": "q_lifestyle",
+    "depth": 8,
+    "type": "question",
+    "text": "How important are completely predictable, shift-based hours with minimal on-call duties?",
+    "answers": [
+      { "text": "Essential — I want maximum schedule control and no overnight call", "next": "q_lifestyle_strict" },
+      { "text": "Preferred but I can accept moderate on-call responsibilities", "next": "q_lifestyle_moderate" }
+    ]
+  },
+
+  "q_lifestyle_strict": {
+    "id": "q_lifestyle_strict",
+    "depth": 6,
+    "type": "question",
+    "text": "Do you want to build ongoing, longitudinal relationships with your patients over months and years?",
+    "answers": [
+      { "text": "Yes — I want to watch patients grow and improve over time", "next": "result_longitudinal" },
+      { "text": "No — each encounter can be complete in itself, episodic is fine", "next": "result_episodic" }
+    ]
+  },
+
+  "q_lifestyle_moderate": {
+    "id": "q_lifestyle_moderate",
+    "depth": 6,
+    "type": "question",
+    "text": "Which best describes your ideal daily clinical environment?",
+    "answers": [
+      { "text": "Inpatient hospital rounds — managing complex admissions", "next": "result_inpatient_lifestyle" },
+      { "text": "Outpatient clinic with some procedural or surgical work", "next": "result_outpatient_lifestyle" },
+      { "text": "Rehabilitation and functional recovery — restoring patients' lives", "next": "result_rehab" }
+    ]
+  },
+
+  "q_cognitive": {
+    "id": "q_cognitive",
+    "depth": 8,
+    "type": "question",
+    "text": "What type of intellectual work energizes you most?",
+    "answers": [
+      { "text": "Solving diagnostic puzzles — identifying rare or complex diseases", "next": "q_cognitive_contact" },
+      { "text": "Longitudinal management and optimizing long-term patient outcomes", "next": "result_complex_management" },
+      { "text": "Academic medicine — research, teaching, and advancing the field", "next": "result_academic" }
+    ]
+  },
+
+  "q_cognitive_contact": {
+    "id": "q_cognitive_contact",
+    "depth": 6,
+    "type": "question",
+    "text": "When solving these diagnostic puzzles, do you want to be directly with the patient — taking histories, doing exams?",
+    "answers": [
+      { "text": "Yes — I want to be at the bedside, forming patient relationships", "next": "result_clinician_detective" },
+      { "text": "No — I prefer working with specimens, images, or data without direct patient care", "next": "result_diagnostic_lab" }
+    ]
+  },
+
+  "q_procedural": {
+    "id": "q_procedural",
+    "depth": 8,
+    "type": "question",
+    "text": "What level of surgical and procedural involvement do you want?",
+    "answers": [
+      { "text": "I want to be the primary surgeon — major, complex operations", "next": "q_major_surgery" },
+      { "text": "Procedures without open surgery — scopes, lines, blocks, imaging-guided work", "next": "result_procedural_nonsurgical" },
+      { "text": "Obstetric and gynecologic care with surgical components", "next": "result_obgyn" }
+    ]
+  },
+
+  "q_major_surgery": {
+    "id": "q_major_surgery",
+    "depth": 6,
+    "type": "question",
+    "text": "Which surgical focus excites you most?",
+    "answers": [
+      { "text": "Orthopedic work — bones, joints, sports injuries, reconstructive surgery", "next": "result_ortho" },
+      { "text": "Abdominal, GI, trauma, and general surgical emergencies", "next": "result_general_surgery" },
+      { "text": "Women's health, obstetrics, and gynecologic oncology", "next": "result_obgyn" }
+    ]
+  },
+
+  "result_competitive_diagnostic": {
+    "id": "result_competitive_diagnostic",
+    "type": "result",
+    "scores": [
+      { "specialty": "Radiology", "score": 88 },
+      { "specialty": "Pathology", "score": 72 },
+      { "specialty": "Neurology", "score": 65 }
+    ],
+    "primary": {
+      "specialty": "Radiology",
+      "explanation": "Your drive for financial success combined with a preference for diagnostic interpretation over direct patient care makes Radiology an exceptional fit. Radiologists are among the highest-paid physicians in the US, and the field rewards analytical precision, pattern recognition, and mastery of imaging technology. Fellowship subspecialties (interventional, neuroradiology, musculoskeletal) further boost earning potential. Be aware: Radiology is highly competitive with limited IMG spots, so exceptional Step scores and research are essential.",
+      "imgMatchRate": "~18%",
+      "avgStep2": "254"
+    }
+  },
+
+  "result_surgery_acute": {
+    "id": "result_surgery_acute",
+    "type": "result",
+    "scores": [
+      { "specialty": "General Surgery", "score": 90 },
+      { "specialty": "Emergency Medicine", "score": 80 },
+      { "specialty": "Anesthesiology", "score": 62 }
+    ],
+    "primary": {
+      "specialty": "General Surgery",
+      "explanation": "You thrive in high-stakes, fast-paced environments and want to be the surgeon in the room. General Surgery is the gateway to some of medicine's most adrenaline-driven subspecialties — trauma surgery, surgical critical care, vascular surgery, and surgical oncology. It demands exceptional technical skill, calm under pressure, and stamina. For IMGs this is a challenging path but achievable with top scores and strong US surgical rotations.",
+      "imgMatchRate": "~20%",
+      "avgStep2": "249"
+    }
+  },
+
+  "result_surgery_elective": {
+    "id": "result_surgery_elective",
+    "type": "result",
+    "scores": [
+      { "specialty": "Orthopedic Surgery", "score": 88 },
+      { "specialty": "General Surgery", "score": 75 },
+      { "specialty": "OB/GYN", "score": 60 }
+    ],
+    "primary": {
+      "specialty": "Orthopedic Surgery",
+      "explanation": "You value meticulous technique and precise, elective surgical craftsmanship. Orthopedic Surgery — restoring mobility through joint replacement, fracture repair, and sports medicine — is one of the most technically demanding and financially rewarding surgical specialties. The lifestyle in subspecialty practice (sports medicine, arthroplasty) can be reasonably good. This is among the most competitive specialties for IMGs; a near-perfect academic profile is required.",
+      "imgMatchRate": "~10%",
+      "avgStep2": "258"
+    }
+  },
+
+  "result_hospital_income": {
+    "id": "result_hospital_income",
+    "type": "result",
+    "scores": [
+      { "specialty": "Anesthesiology", "score": 85 },
+      { "specialty": "Emergency Medicine", "score": 80 },
+      { "specialty": "Internal Medicine", "score": 68 }
+    ],
+    "primary": {
+      "specialty": "Anesthesiology",
+      "explanation": "Anesthesiology offers an outstanding income — consistently top 5 among all physician specialties — with no requirement for a long fellowship. Your role is purely procedural and hospital-based: managing perioperative care, placing central lines, performing nerve blocks, and keeping patients safe during surgery. It rewards technical precision, pharmacology mastery, and calm decision-making under pressure. IMG match rates are moderate and improving.",
+      "imgMatchRate": "~40%",
+      "avgStep2": "248"
+    }
+  },
+
+  "result_outpatient_income": {
+    "id": "result_outpatient_income",
+    "type": "result",
+    "scores": [
+      { "specialty": "Dermatology", "score": 82 },
+      { "specialty": "Psychiatry", "score": 70 },
+      { "specialty": "Neurology", "score": 65 }
+    ],
+    "primary": {
+      "specialty": "Dermatology",
+      "explanation": "Dermatology combines exceptional income, a predominantly outpatient schedule, and fascinating procedural work — biopsies, excisions, lasers, cosmetic treatments. It is one of the most lifestyle-friendly high-earning specialties. The catch: it is among the most competitive in all of medicine, with extremely low IMG match rates. Exceptional research output, publications, and perfect board scores are non-negotiable for IMGs.",
+      "imgMatchRate": "~8%",
+      "avgStep2": "262"
+    }
+  },
+
+  "result_longitudinal": {
+    "id": "result_longitudinal",
+    "type": "result",
+    "scores": [
+      { "specialty": "Family Medicine", "score": 92 },
+      { "specialty": "Psychiatry", "score": 80 },
+      { "specialty": "Pediatrics", "score": 75 }
+    ],
+    "primary": {
+      "specialty": "Family Medicine",
+      "explanation": "You prioritize lifestyle balance and deeply value ongoing relationships with your patients across the full arc of their lives. Family Medicine is the broadest primary care specialty — you will care for patients of all ages, manage chronic diseases, perform minor procedures, and be a trusted anchor in your community. It consistently ranks as one of the most IMG-friendly specialties with solid match rates. Rotations and strong letters of recommendation are your most important application assets.",
+      "imgMatchRate": "~60%",
+      "avgStep2": "233"
+    }
+  },
+
+  "result_episodic": {
+    "id": "result_episodic",
+    "type": "result",
+    "scores": [
+      { "specialty": "Pathology", "score": 88 },
+      { "specialty": "Radiology", "score": 80 },
+      { "specialty": "Physical Medicine & Rehabilitation", "score": 62 }
+    ],
+    "primary": {
+      "specialty": "Pathology",
+      "explanation": "You want predictable hours and minimal on-call, with no requirement for ongoing patient relationships. Pathology is perfect: your work consists of analyzing tissue specimens, running autopsies, and providing critical diagnostic information that guides clinical care — all without direct patient interaction. Hours are highly controlled, academic pathology offers rich research opportunities, and IMG match rates are among the best in competitive specialties.",
+      "imgMatchRate": "~55%",
+      "avgStep2": "245"
+    }
+  },
+
+  "result_inpatient_lifestyle": {
+    "id": "result_inpatient_lifestyle",
+    "type": "result",
+    "scores": [
+      { "specialty": "Internal Medicine", "score": 88 },
+      { "specialty": "Neurology", "score": 78 },
+      { "specialty": "Pediatrics", "score": 72 }
+    ],
+    "primary": {
+      "specialty": "Internal Medicine",
+      "explanation": "You are comfortable with on-call responsibilities and find inpatient medicine intellectually fulfilling. Internal Medicine is the backbone of hospital medicine — managing multi-system disease, leading code teams, and mentoring students. It opens doors to nearly every internal medicine subspecialty (cardiology, GI, nephrology, oncology). IM is historically one of the most IMG-friendly specialties, with strong match rates and a large number of available positions.",
+      "imgMatchRate": "~55%",
+      "avgStep2": "243"
+    }
+  },
+
+  "result_outpatient_lifestyle": {
+    "id": "result_outpatient_lifestyle",
+    "type": "result",
+    "scores": [
+      { "specialty": "OB/GYN", "score": 82 },
+      { "specialty": "Family Medicine", "score": 78 },
+      { "specialty": "Internal Medicine", "score": 68 }
+    ],
+    "primary": {
+      "specialty": "OB/GYN",
+      "explanation": "You want a balance of outpatient clinic work and hands-on surgical procedures while still having some schedule predictability. OB/GYN offers exactly this — prenatal care, well-woman visits, and gynecologic procedures in clinic, combined with deliveries and surgeries in the hospital. It is a deeply rewarding specialty with a strong procedural component. It is competitive for IMGs but achievable with strong academic credentials and US rotations.",
+      "imgMatchRate": "~22%",
+      "avgStep2": "249"
+    }
+  },
+
+  "result_rehab": {
+    "id": "result_rehab",
+    "type": "result",
+    "scores": [
+      { "specialty": "Physical Medicine & Rehabilitation", "score": 92 },
+      { "specialty": "Neurology", "score": 75 },
+      { "specialty": "Psychiatry", "score": 65 }
+    ],
+    "primary": {
+      "specialty": "Physical Medicine & Rehabilitation",
+      "explanation": "You are drawn to restoring function and improving quality of life. PM&R physicians work with patients recovering from strokes, spinal cord injuries, amputations, and traumatic brain injuries. The specialty blends inpatient rehabilitation rounds with outpatient musculoskeletal procedures (injections, EMG). Hours are among the most controlled in hospital-based medicine, and PM&R is increasingly IMG-friendly with growing residency positions.",
+      "imgMatchRate": "~58%",
+      "avgStep2": "244"
+    }
+  },
+
+  "result_complex_management": {
+    "id": "result_complex_management",
+    "type": "result",
+    "scores": [
+      { "specialty": "Neurology", "score": 88 },
+      { "specialty": "Internal Medicine", "score": 82 },
+      { "specialty": "Psychiatry", "score": 68 }
+    ],
+    "primary": {
+      "specialty": "Neurology",
+      "explanation": "You find deep satisfaction in the longitudinal management of complex, often mysterious neurological conditions — epilepsy, multiple sclerosis, Parkinson's disease, and rare movement disorders. Neurology rewards scientific curiosity, careful examination skills, and therapeutic patience. Fellowship subspecialties (epilepsy, neurocritical care, stroke) allow you to blend acute intervention with long-term management. IMG match rates are solid and research is highly valued.",
+      "imgMatchRate": "~48%",
+      "avgStep2": "244"
+    }
+  },
+
+  "result_academic": {
+    "id": "result_academic",
+    "type": "result",
+    "scores": [
+      { "specialty": "Internal Medicine", "score": 85 },
+      { "specialty": "Pathology", "score": 80 },
+      { "specialty": "Radiology", "score": 75 }
+    ],
+    "primary": {
+      "specialty": "Internal Medicine",
+      "explanation": "Academic medicine is your calling — publishing, teaching, and shaping how medicine is practiced. Internal Medicine is the most natural home for academic physicians, offering unparalleled breadth, opportunities in virtually every subspecialty, and robust research infrastructure at academic centers. The academic IM track leads to positions at major medical schools. Research output, publications, and strong board scores will define your competitiveness.",
+      "imgMatchRate": "~55%",
+      "avgStep2": "243"
+    }
+  },
+
+  "result_clinician_detective": {
+    "id": "result_clinician_detective",
+    "type": "result",
+    "scores": [
+      { "specialty": "Internal Medicine", "score": 90 },
+      { "specialty": "Neurology", "score": 82 },
+      { "specialty": "Psychiatry", "score": 68 }
+    ],
+    "primary": {
+      "specialty": "Internal Medicine",
+      "explanation": "You are the physician who sits with the patient, listens carefully, and solves the puzzle nobody else could. Internal Medicine is the specialty of diagnostic medicine — systemic diseases, rare presentations, undifferentiated illness in complex patients. Your intellectual curiosity and patient-centered approach are perfectly aligned with IM's culture. With strong boards and US clinical exposure, IM offers IMGs one of the strongest paths to matching.",
+      "imgMatchRate": "~55%",
+      "avgStep2": "243"
+    }
+  },
+
+  "result_diagnostic_lab": {
+    "id": "result_diagnostic_lab",
+    "type": "result",
+    "scores": [
+      { "specialty": "Pathology", "score": 92 },
+      { "specialty": "Radiology", "score": 85 },
+      { "specialty": "Neurology", "score": 58 }
+    ],
+    "primary": {
+      "specialty": "Pathology",
+      "explanation": "You are energized by the science behind disease — analyzing cells, identifying microscopic patterns, and producing the diagnoses that guide every clinical decision. Pathology is the field for physicians who prefer intellectual depth and precision over direct patient interaction. Research is highly valued, the work environment is collegial and predictable, and IMG match rates are strong relative to the specialty's prestige.",
+      "imgMatchRate": "~55%",
+      "avgStep2": "245"
+    }
+  },
+
+  "result_procedural_nonsurgical": {
+    "id": "result_procedural_nonsurgical",
+    "type": "result",
+    "scores": [
+      { "specialty": "Anesthesiology", "score": 90 },
+      { "specialty": "Emergency Medicine", "score": 80 },
+      { "specialty": "Internal Medicine", "score": 65 }
+    ],
+    "primary": {
+      "specialty": "Anesthesiology",
+      "explanation": "You want to be procedural — placing epidurals, nerve blocks, central lines, arterial lines — without the commitment of open surgery. Anesthesiology is the master of these interventions. You work at the intersection of pharmacology, physiology, and technical skill, ensuring patients' safety during every surgical procedure. Income is excellent, call frequency is moderate, and subspecialty fellowships (cardiac anesthesia, pain management) offer further specialization.",
+      "imgMatchRate": "~40%",
+      "avgStep2": "248"
+    }
+  },
+
+  "result_obgyn": {
+    "id": "result_obgyn",
+    "type": "result",
+    "scores": [
+      { "specialty": "OB/GYN", "score": 94 },
+      { "specialty": "General Surgery", "score": 62 },
+      { "specialty": "Family Medicine", "score": 55 }
+    ],
+    "primary": {
+      "specialty": "OB/GYN",
+      "explanation": "OB/GYN is a uniquely versatile specialty that combines the intimacy of women's primary care with the technical demands of major surgery — hysterectomies, cesarean sections, laparoscopic procedures, and complex oncologic resections. If you are passionate about women's health across the entire lifecycle and want both surgical skill and continuity of care, this is an ideal fit. IMGs can compete successfully with excellent board scores and dedicated rotations.",
+      "imgMatchRate": "~22%",
+      "avgStep2": "249"
+    }
+  },
+
+  "result_ortho": {
+    "id": "result_ortho",
+    "type": "result",
+    "scores": [
+      { "specialty": "Orthopedic Surgery", "score": 94 },
+      { "specialty": "Physical Medicine & Rehabilitation", "score": 72 },
+      { "specialty": "General Surgery", "score": 60 }
+    ],
+    "primary": {
+      "specialty": "Orthopedic Surgery",
+      "explanation": "You are drawn to musculoskeletal medicine — restoring function through precise surgical intervention on bones, joints, tendons, and ligaments. Orthopedic surgeons are among the highest-paid physicians and find deep satisfaction in seeing patients regain mobility. The path is demanding: exceptional boards, research, and letters are required. This is the most competitive surgical specialty for IMGs, but highly motivated candidates with exceptional credentials do match.",
+      "imgMatchRate": "~10%",
+      "avgStep2": "258"
+    }
+  },
+
+  "result_general_surgery": {
+    "id": "result_general_surgery",
+    "type": "result",
+    "scores": [
+      { "specialty": "General Surgery", "score": 92 },
+      { "specialty": "OB/GYN", "score": 68 },
+      { "specialty": "Emergency Medicine", "score": 62 }
+    ],
+    "primary": {
+      "specialty": "General Surgery",
+      "explanation": "General Surgery is the foundation of all surgical training — abdominal operations, bowel resections, hernia repairs, breast procedures, and trauma management. If you want to be in the OR every day managing acute and complex surgical problems, this is your home. It is demanding in both training and career, with long hours and high acuity, but also deeply rewarding. For IMGs it is competitive but accessible with outstanding academic performance and dedicated research.",
+      "imgMatchRate": "~20%",
+      "avgStep2": "249"
+    }
+  }
+}

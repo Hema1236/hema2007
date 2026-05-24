@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Greeter</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0d0d0d;
+    color: #f1f1f1;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .card {
+    background: #161616;
+    border: 1px solid #2a2a2a;
+    border-radius: 16px;
+    padding: 40px 36px;
+    width: 100%;
+    max-width: 460px;
+  }
+
+  .title {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: #555;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+  }
+
+  .field-label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: #555;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  input {
+    width: 100%;
+    background: #0d0d0d;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    padding: 13px 16px;
+    color: #f1f1f1;
+    font-size: 16px;
+    font-family: inherit;
+    outline: none;
+    margin-bottom: 22px;
+  }
+  input:focus { border-color: #4f8ef7; }
+  input::placeholder { color: #333; }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 26px;
+  }
+
+  .chip {
+    padding: 7px 15px;
+    border-radius: 999px;
+    border: 1px solid #2a2a2a;
+    background: transparent;
+    color: #888;
+    font-size: 13px;
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .chip:hover  { border-color: #4f8ef7; color: #4f8ef7; }
+  .chip.active { background: #4f8ef7; border-color: #4f8ef7; color: #fff; }
+
+  .btn {
+    width: 100%;
+    padding: 14px;
+    background: #4f8ef7;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 15px;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .btn:hover { background: #3a7aed; }
+
+  #result {
+    display: none;
+    text-align: center;
+    margin-top: 36px;
+    padding-top: 32px;
+    border-top: 1px solid #2a2a2a;
+  }
+
+  #result .prefix {
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    color: #4f8ef7;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  #result .bigname {
+    font-size: clamp(30px, 9vw, 52px);
+    font-weight: 700;
+    color: #f9fafb;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  #result .emoji {
+    font-size: 40px;
+    margin-top: 14px;
+    display: inline-block;
+    animation: wave 1.4s ease-in-out infinite;
+  }
+
+  @keyframes wave {
+    0%,100% { transform: rotate(0deg);  }
+    30%      { transform: rotate(22deg); }
+    70%      { transform: rotate(-8deg); }
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="title">Greeter</div>
+
+  <div class="field-label">Your name</div>
+  <input id="nameInput" type="text" placeholder="e.g. Ibrahim" autocomplete="off" />
+
+  <div class="field-label">Greeting</div>
+  <div class="chips" id="chips">
+    <button class="chip active">Hello</button>
+    <button class="chip">Good morning</button>
+    <button class="chip">Good evening</button>
+    <button class="chip">Good night</button>
+    <button class="chip">How are you,</button>
+    <button class="chip">Hey</button>
+    <button class="chip">Welcome back,</button>
+    <button class="chip">Nice to see you,</button>
+  </div>
+
+  <button class="btn" id="goBtn">Say it →</button>
+
+  <div id="result">
+    <div class="prefix" id="prefixText"></div>
+    <div class="bigname" id="nameText"></div>
+    <div class="emoji">👋</div>
+  </div>
+</div>
+
+<script>
+  var activeChip = document.querySelector('.chip.active');
+
+  document.getElementById('chips').addEventListener('click', function(e) {
+    var chip = e.target.closest('.chip');
+    if (!chip) return;
+    if (activeChip) activeChip.classList.remove('active');
+    chip.classList.add('active');
+    activeChip = chip;
+  });
+
+  document.getElementById('nameInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') go();
+  });
+
+  document.getElementById('goBtn').addEventListener('click', go);
+
+  function go() {
+    var name = document.getElementById('nameInput').value.trim();
+    if (!name) {
+      document.getElementById('nameInput').focus();
+      return;
+    }
+    var greeting = activeChip ? activeChip.textContent : 'Hello';
+    document.getElementById('prefixText').textContent = greeting;
+    document.getElementById('nameText').textContent = name;
+    document.getElementById('result').style.display = 'block';
+  }
+</script>
+
+</body>
+</html>

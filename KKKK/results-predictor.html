@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Match Prediction Results — IMG Navigator</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/results.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container">
+    <a class="nav-logo" href="index.html">IMG Navigator</a>
+    <ul class="nav-links">
+      <li><a href="recommender.html">Specialty Finder</a></li>
+      <li><a href="predictor.html">Match Predictor</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="results-page">
+  <div class="container">
+    <div id="results-content">
+      <p style="text-align:center;padding:40px;color:var(--color-muted)">Calculating your results…</p>
+    </div>
+  </div>
+</main>
+
+<script src="js/shared.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const data = loadSession('predictor-result');
+  if (!data) { window.location.href = 'predictor.html'; return; }
+
+  const { low, high, midpoint, factors, advice, specialty, spec, applicantStep2 } = data;
+
+  function gaugeColor(pct) {
+    if (pct >= 65) return '#2EAA6B';
+    if (pct >= 40) return '#D48B10';
+    return '#C0392B';
+  }
+
+  const arcColor = gaugeColor(midpoint);
+  const circumference = Math.PI * 80;
+  const dashoffset = circumference * (1 - midpoint / 100);
+
+  const factorKeys = ['step1','step2','research','presentations','rotations','lors','experience'];
+  const factorRows = factorKeys.map(k => {
+    const f = factors[k];
+    return `
+      <div class="factor-row">
+        <div class="factor-bar-side ${f.cls}"></div>
+        <div class="factor-name">${f.name}</div>
+        <div class="factor-badge">
+          <span class="badge badge-${f.cls}">${f.label}</span>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  const userStep2 = applicantStep2 || 0;
+  const maxStep2 = 280;
+  const userPct   = Math.min(100, Math.round(userStep2 / maxStep2 * 100));
+  const imgPct    = Math.min(100, Math.round(spec.medianMatchedStep2IMG / maxStep2 * 100));
+  const seniorPct = Math.min(100, Math.round(spec.medianMatchedStep2USSenior / maxStep2 * 100));
+
+  const adviceHtml = advice.map(a => `<li>${a}</li>`).join('');
+
+  const competivenessLabels = {
+    'low': 'Less Competitive',
+    'moderate': 'Moderately Competitive',
+    'high': 'Highly Competitive',
+    'very_high': 'Extremely Competitive'
+  };
+
+  document.getElementById('results-content').innerHTML = `
+
+    <div class="predictor-result-header">
+      <div class="result-eyebrow">${specialty} — ${competivenessLabels[spec.competitivenessLevel] || ''}</div>
+      <div class="match-range">${low}–${high}%</div>
+      <div class="match-subtitle">Estimated match likelihood based on your profile</div>
+
+      <div class="gauge-wrap">
+        <svg class="gauge-svg" width="200" height="120" viewBox="0 0 200 120">
+          <path class="gauge-track"
+            d="M 20 100 A 80 80 0 0 1 180 100"
+            stroke-dasharray="${circumference}" />
+          <path class="gauge-arc"
+            d="M 20 100 A 80 80 0 0 1 180 100"
+            stroke="${arcColor}"
+            stroke-dasharray="${circumference}"
+            stroke-dashoffset="${circumference}"
+            id="gauge-arc-path" />
+          <text class="gauge-label-low"  x="14"  y="116" text-anchor="middle">0%</text>
+          <text class="gauge-label-high" x="186" y="116" text-anchor="middle">100%</text>
+          <text class="gauge-pct"     x="100" y="88" text-anchor="middle" id="gauge-pct-text">0%</text>
+          <text class="gauge-pct-sub" x="100" y="105" text-anchor="middle">midpoint</text>
+        </svg>
+      </div>
+
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:4px">
+        <div class="result-stat">
+          <div class="stat-val" style="color:${arcColor}">${midpoint}%</div>
+          <div class="stat-lbl">Midpoint Estimate</div>
+        </div>
+        <div class="result-stat">
+          <div class="stat-val">${spec.imgMatchRate}%</div>
+          <div class="stat-lbl">Overall IMG Rate</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="factors-card">
+      <h2>Factor Breakdown</h2>
+      ${factorRows}
+    </div>
+
+    <div class="comparison-card">
+      <h2>How You Compare — Step 2 CK</h2>
+      <div class="comp-row">
+        <div class="comp-label">
+          <span>Your Score</span>
+          <strong>${userStep2 || 'N/A'}</strong>
+        </div>
+        <div class="comp-track">
+          <div class="comp-fill comp-fill-user" style="width:0%" data-width="${userPct}%"></div>
+        </div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-label">
+          <span>Median Matched IMG</span>
+          <strong>${spec.medianMatchedStep2IMG}</strong>
+        </div>
+        <div class="comp-track">
+          <div class="comp-fill comp-fill-img" style="width:0%" data-width="${imgPct}%"></div>
+        </div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-label">
+          <span>Median Matched US Senior</span>
+          <strong>${spec.medianMatchedStep2USSenior}</strong>
+        </div>
+        <div class="comp-track">
+          <div class="comp-fill comp-fill-senior" style="width:0%" data-width="${seniorPct}%"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="advice-card">
+      <h2>Recommendations to Improve Your Odds</h2>
+      <ul class="advice-list">${adviceHtml}</ul>
+    </div>
+
+    <div style="margin-bottom:28px">
+      <div class="result-ctas">
+        <a href="predictor.html" class="btn btn-primary">Try a Different Specialty</a>
+        <a href="recommender.html" class="btn btn-outline">Find My Best-Fit Specialty</a>
+      </div>
+    </div>
+
+    <p class="disclaimer-note" style="font-size:0.78rem;color:var(--color-muted);line-height:1.5">
+      These estimates are based on published NRMP match data and do not account for individual program preferences, personal statement quality, or interview performance. Use as a planning tool only.
+    </p>
+  `;
+
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      const arc = document.getElementById('gauge-arc-path');
+      const pctText = document.getElementById('gauge-pct-text');
+      if (arc) {
+        arc.style.strokeDashoffset = circumference * (1 - midpoint / 100);
+        arc.style.transition = 'stroke-dashoffset 1s ease 0.3s';
+      }
+      if (pctText) {
+        let current = 0;
+        const interval = setInterval(() => {
+          current = Math.min(current + 2, midpoint);
+          pctText.textContent = current + '%';
+          if (current >= midpoint) clearInterval(interval);
+        }, 20);
+      }
+      document.querySelectorAll('[data-width]').forEach(el => {
+        el.style.width = el.dataset.width;
+        el.style.transition = 'width 0.7s ease 0.4s';
+      });
+    }, 50);
+  });
+});
+</script>
+</body>
+</html>

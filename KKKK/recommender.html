@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Specialty Finder — IMG Navigator</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/quiz.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container">
+    <a class="nav-logo" href="index.html">IMG Navigator</a>
+    <ul class="nav-links">
+      <li><a href="recommender.html">Specialty Finder</a></li>
+      <li><a href="predictor.html">Match Predictor</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="quiz-page">
+  <div class="container">
+
+    <div class="quiz-header">
+      <h1>Specialty Finder</h1>
+      <p>Answer a few questions about your priorities. There are no right answers — just honest ones.</p>
+    </div>
+
+    <div id="quiz-shell">
+      <div class="progress-wrap">
+        <div class="progress-meta">
+          <span id="progress-label">Step 1</span>
+          <span id="progress-pct">0%</span>
+        </div>
+        <div class="progress-track">
+          <div id="progress-bar"></div>
+        </div>
+      </div>
+
+      <div class="question-card">
+        <p id="question-text">Loading…</p>
+        <div id="options-container"></div>
+      </div>
+
+      <div class="quiz-nav">
+        <button id="back-btn" type="button">← Back</button>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<script src="js/data/question-tree.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/recommender.js"></script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Match Predictor — IMG Navigator</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/form.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container">
+    <a class="nav-logo" href="index.html">IMG Navigator</a>
+    <ul class="nav-links">
+      <li><a href="recommender.html">Specialty Finder</a></li>
+      <li><a href="predictor.html">Match Predictor</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="predictor-page">
+  <div class="container">
+
+    <div class="page-header">
+      <h1>Match Predictor</h1>
+      <p>Enter your profile data to receive a personalized match probability estimate for your target specialty.</p>
+    </div>
+
+    <div class="form-card">
+      <form id="predictor-form" novalidate>
+
+        <div class="form-section">
+          <div class="form-section-title">USMLE Scores</div>
+
+          <div class="field-group">
+            <label>Step 1 Score Type</label>
+            <div class="radio-group" id="step1TypeGroup">
+              <label class="radio-option">
+                <input type="radio" name="step1Type" value="numeric"> Numeric Score
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="step1Type" value="passfail"> Pass/Fail
+              </label>
+            </div>
+          </div>
+
+          <div class="field-group" id="step1ScoreWrap" style="display:none">
+            <label for="step1Score">Step 1 Score</label>
+            <span class="field-hint">Enter your three-digit score (140–300)</span>
+            <input type="number" id="step1Score" name="step1Score" min="140" max="300" placeholder="e.g. 240">
+          </div>
+
+          <div class="field-group">
+            <label for="step2Score">Step 2 CK Score</label>
+            <span class="field-hint">Enter your three-digit score (140–300)</span>
+            <input type="number" id="step2Score" name="step2Score" min="140" max="300" placeholder="e.g. 245">
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section-title">Research & Academic Activity</div>
+
+          <div class="field-group">
+            <label for="research">Peer-Reviewed Publications</label>
+            <span class="field-hint">Include original research, case reports, and review articles</span>
+            <input type="number" id="research" name="research" min="0" placeholder="0">
+          </div>
+
+          <div class="field-group">
+            <label for="presentations">Presentations & Abstracts</label>
+            <span class="field-hint">Conference posters, oral presentations, and accepted abstracts</span>
+            <input type="number" id="presentations" name="presentations" min="0" placeholder="0">
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section-title">Clinical Experience</div>
+
+          <div class="field-group">
+            <label for="rotations">US Clinical Rotations</label>
+            <span class="field-hint">Number of clinical rotations, clerkships, or sub-internships at US institutions</span>
+            <input type="number" id="rotations" name="rotations" min="0" placeholder="0">
+          </div>
+
+          <div class="field-group">
+            <label for="lors">Letters of Recommendation (LORs)</label>
+            <span class="field-hint">Total number of LORs you have secured</span>
+            <input type="number" id="lors" name="lors" min="0" max="10" placeholder="3">
+          </div>
+
+          <div class="field-group">
+            <label for="experience">Post-Graduation Clinical Experience (years)</label>
+            <span class="field-hint">Years of clinical work after medical school graduation (0 if currently a new graduate)</span>
+            <input type="number" id="experience" name="experience" min="0" step="0.5" placeholder="1">
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section-title">Applicant Profile</div>
+
+          <div class="field-group">
+            <label for="imgType">IMG Type</label>
+            <select id="imgType" name="imgType">
+              <option value="">Select IMG type…</option>
+              <option value="nonusimg">Non-US IMG</option>
+              <option value="usimg">US IMG</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label for="specialty">Target Specialty</label>
+            <select id="specialty" name="specialty">
+              <option value="">Select a specialty…</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-submit">
+          <button type="submit" class="btn btn-primary">Calculate Match Odds</button>
+          <p class="disclaimer-note">Results are estimates based on published NRMP data. Individual program preferences vary.</p>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</main>
+
+<script src="js/data/specialties.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/predictor.js"></script>
+</body>
+</html>
